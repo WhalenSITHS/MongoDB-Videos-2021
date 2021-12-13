@@ -10,6 +10,7 @@ const shopSchema = new mongoose.Schema({
   description: {
     type: String,
     trim: true,
+    required: "Please provide a description",
   },
   tags: [String],
 });
@@ -22,4 +23,4 @@ shopSchema.pre("save", function (next) {
   this.slug = slugify(this.name);
   next();
 });
-mongoose.model.exports = mongoose.model("Shop", shopSchema);
+module.exports = mongoose.model("Shop", shopSchema);

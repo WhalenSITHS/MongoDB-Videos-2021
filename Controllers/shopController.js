@@ -1,7 +1,4 @@
-exports.middlewareSample = (req, res, next) => {
-  req.name = "TEST";
-  next();
-};
+const Shop = require("../Models/shops");
 
 exports.homePage = async (req, res) => {
   const stores = ["Dunkin", "Tim Hortons", "Starbucks"];
@@ -13,18 +10,13 @@ exports.homePage = async (req, res) => {
   }
 };
 
-exports.authMiddleware = async (req, res, next) => {
-  if (req.body.user) {
-    next();
-  } else {
-    res.json("You must be signed in");
-  }
-};
-
-exports.authPage = async (req, res) => {
+exports.createShop = async (req, res) => {
   try {
-    res.json("Secret Data");
+    const shop = new Shop(req.body);
+    await shop.save();
+    res.json(shop);
   } catch (error) {
     console.log(error);
+    res.status(500).json(error);
   }
 };
