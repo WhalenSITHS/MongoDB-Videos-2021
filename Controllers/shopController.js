@@ -29,3 +29,16 @@ exports.getShops = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.updateShop = async (req, res) => {
+  try {
+    //find the store then update the store
+    const shop = await Shop.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+      runValidators: true,
+    }).exec();
+    res.json(shop);
+  } catch (error) {
+    console.log(error);
+  }
+};
