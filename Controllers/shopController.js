@@ -20,3 +20,12 @@ exports.createShop = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.getShops = async (req, res) => {
+  try {
+    const Shops = await Shop.find().limit(2);
+    res.json(Shops);
+  } catch (error) {
+    console.log(error);
+  }
+};
