@@ -4,5 +4,5 @@ const shopController = require("../Controllers/shopController");
 
 router.get("/", shopController.getShops);
 router.post("/add", shopController.createShop);
-router.patch("/shops/:id", shopController.updateShop);
+router.patch("/shop/:id", shopController.updateShop);
 module.exports = router;

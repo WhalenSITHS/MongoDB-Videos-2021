@@ -32,11 +32,10 @@ exports.getShops = async (req, res) => {
 
 exports.updateShop = async (req, res) => {
   try {
-    //find the store then update the store
-    const shop = await Shop.findOneAndUpdate({ _id: req.params.id }, req.body, {
-      new: true,
-      runValidators: true,
-    }).exec();
+    const shop = await Shop.findById(req.params.id);
+    const updates = Object.keys(req.body);
+    updates.forEach((update) => (shop[update] = req.body[update]));
+    await shop.save();
     res.json(shop);
   } catch (error) {
     console.log(error);
